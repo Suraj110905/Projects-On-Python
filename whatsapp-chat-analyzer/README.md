@@ -1,10 +1,10 @@
 # 💬 WhatsApp Chat Analyzer
 
-## 📖 Project Overview
+##  Project Overview
 
 WhatsApp Chat Analyzer is a comprehensive Python-based data analysis tool designed to extract meaningful insights from WhatsApp chat exports. The project combines natural language processing, data visualization, and interactive web technologies to transform raw chat data into actionable analytics.
 
-### 🎯 What Does This Project Do?
+###  What Does This Project Do?
 
 This tool takes a WhatsApp chat export file (the `.txt` file you get when exporting a conversation) and performs deep analysis to reveal:
 
@@ -14,7 +14,7 @@ This tool takes a WhatsApp chat export file (the `.txt` file you get when export
 - **Engagement Metrics**: How quickly do people respond to each other?
 - **Visual Insights**: Beautiful charts, graphs, and word clouds that make data easy to understand
 
-### 🔍 Why This Project?
+###  Why This Project?
 
 WhatsApp is one of the world's most popular messaging platforms, with billions of conversations happening daily. However, WhatsApp itself provides limited analytical capabilities. This project fills that gap by:
 
@@ -23,7 +23,7 @@ WhatsApp is one of the world's most popular messaging platforms, with billions o
 3. **Being User-Friendly**: Both technical users (via Python API) and non-technical users (via web dashboard) can benefit
 4. **Offering Flexibility**: Multiple analysis types and visualization options cater to different needs
 
-### 🏗️ Project Architecture
+###  Project Architecture
 
 The project is built on a modular architecture with four main components:
 
@@ -111,7 +111,7 @@ The user interface - makes the tool accessible to everyone.
 - **Responsive Design**: Works on different screen sizes
 - **Error Handling**: Graceful handling of invalid files or parsing issues
 
-### 🧠 Technical Deep Dive
+###  Technical Deep Dive
 
 #### Data Processing Pipeline
 
@@ -183,7 +183,7 @@ Classification logic:
 #### Response Time Calculation
 Messages are sorted chronologically. When consecutive messages are from different authors, the time difference is calculated. Only differences under 2 hours are considered "responses" to filter out conversations that resumed after long breaks.
 
-### 🎨 Features in Detail
+###  Features in Detail
 
 #### Feature 1: User Statistics Dashboard
 Provides a comprehensive breakdown of messaging behavior:
@@ -278,7 +278,7 @@ Measure engagement and responsiveness:
 - Detect changes in responsiveness
 - Compare mutual engagement
 
-### 🖥️ How to Use This Project
+###  How to Use This Project
 
 #### Method 1: Web Dashboard (Recommended for Most Users)
 
@@ -367,7 +367,7 @@ hourly = analyzer.get_hourly_activity()
 visualizer.plot_hourly_activity(hourly, save_path='hourly.png')
 ```
 
-### 💾 Installation & Setup
+###  Installation & Setup
 
 **Prerequisites:**
 - Python 3.9 or higher
@@ -454,7 +454,7 @@ print(f"Total messages: {info['total_messages']}")
 print(f"Participants: {info['participant_names']}")
 ```
 
-### 📊 Example Output & Interpretation
+###  Example Output & Interpretation
 
 **Sample User Statistics Output:**
 ```
@@ -480,7 +480,7 @@ Bob: Avg Compound Score: +0.28 (Slightly positive)
 - Very low negative sentiment (7%) indicates a healthy interaction
 - Both users maintain positive tone, with Alice slightly more positive
 
-### 📝 Project File Structure Explained
+###  Project File Structure Explained
 
 ```
 whatsapp-chat-analyzer/
@@ -523,7 +523,7 @@ whatsapp-chat-analyzer/
 - **requirements.txt**: Lists all Python packages needed (pandas, streamlit, etc.)
 - **pyproject.toml**: Modern Python packaging standard with metadata and tool configurations
 
-### 🧪 Testing & Quality Assurance
+###  Testing & Quality Assurance
 
 **Running Tests:**
 ```bash
@@ -561,7 +561,7 @@ pytest tests/test_parser.py::TestChatParser::test_match_android_pattern -v
 **Test Coverage:**
 Current test suite covers approximately 70% of codebase, focusing on critical parsing and analysis functions.
 
-### 🔧 Configuration & Customization
+###  Configuration & Customization
 
 **Customizing Analysis Parameters:**
 
@@ -611,7 +611,7 @@ stop_words = {
 }
 ```
 
-### 📱 Exporting WhatsApp Chats (Detailed)
+###  Exporting WhatsApp Chats (Detailed)
 
 **Android Devices:**
 1. Open WhatsApp application
@@ -674,7 +674,7 @@ stop_words = {
 - Be cautious when sharing screenshots of analysis results
 - Use virtual environments to isolate dependencies
 
-### 🐛 Troubleshooting Common Issues
+###  Troubleshooting Common Issues
 
 **Problem: "FileNotFoundError" or chat won't load**
 - Solution: Ensure file path is correct and uses forward slashes or escaped backslashes
@@ -705,7 +705,7 @@ stop_words = {
 - Try: `streamlit run src/whatsapp_analyzer/app.py --server.port 8502`
 - Ensure all dependencies are installed: `pip install -r requirements.txt`
 
-### 🚀 Performance Considerations
+###  Performance Considerations
 
 **Optimal Performance:**
 - Chat size: 100 - 10,000 messages works best
@@ -758,7 +758,7 @@ print(f"Neutral: {sentiment['overall']['neutral']}")
 print(f"Negative: {sentiment['overall']['negative']}")
 ```
 
-## 🏗️ Project Structure
+##  Project Structure
 
 ```
 whatsapp-chat-analyzer/
@@ -784,7 +784,7 @@ whatsapp-chat-analyzer/
 └── README.md
 ```
 
-## 🔧 Configuration
+##  Configuration
 
 ### Analysis Settings
 
@@ -843,7 +843,7 @@ wordcloud = visualizer.create_wordcloud(
 - Python programming examples
 - Data visualization tutorials
 
-### 🔮 Technology Stack Deep Dive
+###  Technology Stack Deep Dive
 
 **Core Dependencies:**
 
@@ -866,7 +866,7 @@ wordcloud = visualizer.create_wordcloud(
 - **VADER**: Specifically designed for social media sentiment (better than generic models)
 - **Plotly**: Enables interactivity without JavaScript knowledge
 
-### 📚 Additional Resources
+###  Additional Resources
 
 **Learning Materials:**
 - [QUICKSTART.md](QUICKSTART.md) - Quick setup guide
@@ -940,19 +940,19 @@ Contributions are welcome! This project can be improved in many ways:
 - Write docstrings for all functions
 - Keep functions focused and modular
 
-### 📝 License
+###  License
 
 This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) file for full details.
 
 **What this means:**
-- ✅ Commercial use allowed
-- ✅ Modification allowed
-- ✅ Distribution allowed
-- ✅ Private use allowed
-- ⚠️ License and copyright notice required
-- ❌ No liability or warranty provided
+-  Commercial use allowed
+-  Modification allowed
+-  Distribution allowed
+-  Private use allowed
+-  License and copyright notice required
+-  No liability or warranty provided
 
-### 🙏 Acknowledgments
+###  Acknowledgments
 
 This project wouldn't be possible without these amazing open-source libraries:
 
@@ -968,7 +968,7 @@ This project wouldn't be possible without these amazing open-source libraries:
 
 Special thanks to the open-source community for making data science accessible to everyone.
 
-### 🚀 Roadmap & Future Enhancements
+###  Roadmap & Future Enhancements
 
 **Version 0.2.0 (Planned)**
 - [ ] Multi-chat comparison feature
@@ -1000,7 +1000,7 @@ Special thanks to the open-source community for making data science accessible t
 - [ ] Comparison with anonymized global statistics
 - [ ] Relationship score calculator
 
-### 📊 Version History
+###  Version History
 
 **v0.1.0** (February 2024) - *Initial Release*
 
@@ -1025,13 +1025,13 @@ Special thanks to the open-source community for making data science accessible t
 - pandas, numpy, matplotlib, seaborn, plotly
 - streamlit, emoji, vaderSentiment, wordcloud
 
-### 📞 Support & Contact
+###  Support & Contact
 
 **Need Help?**
-- 🐛 Report bugs via GitHub Issues
-- 💡 Request features via GitHub Issues
-- 💬 Ask questions via GitHub Discussions
-- 📚 Read [QUICKSTART.md](QUICKSTART.md) for quick setup
+-  Report bugs via GitHub Issues
+-  Request features via GitHub Issues
+-  Ask questions via GitHub Discussions
+-  Read [QUICKSTART.md](QUICKSTART.md) for quick setup
 
 **Found a Bug?**
 Please include:
