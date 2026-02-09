@@ -65,7 +65,7 @@ def main():
         )
         
         st.markdown("---")
-        st.markdown("### 🎯 Features")
+        st.markdown("### Features :")
         st.markdown("""
         - 📊 User Statistics
         - 📈 Activity Timeline
@@ -514,14 +514,14 @@ def main():
         st.info("👆 Please upload a WhatsApp chat export file to begin analysis")
         
         st.markdown("---")
-        st.markdown("### 📖 How to Use")
+        st.markdown("### How to Use")
         st.markdown("""
         1. **Export your chat** from WhatsApp (Settings → Chats → Chat History → Export Chat)
         2. **Choose 'Without Media'** when prompted
         3. **Upload the .txt file** using the sidebar
         4. **Explore the analysis** across different tabs
         
-        ### 🎯 What You'll Get
+        ### What You'll Get
         - Comprehensive user statistics and message distribution
         - Time-based activity patterns (hourly, daily, timeline)
         - Emoji usage analysis and rankings
