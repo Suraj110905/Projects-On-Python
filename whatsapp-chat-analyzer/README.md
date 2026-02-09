@@ -1046,14 +1046,9 @@ Please include:
 
 ## ⭐ If you find this project useful, please consider giving it a star!
 
-**Made with ❤️ by developers, for chat enthusiasts**
-
-*Analyze. Understand. Improve.*
-
-[Report Bug](https://github.com/yourusername/whatsapp-chat-analyzer/issues) · [Request Feature](https://github.com/yourusername/whatsapp-chat-analyzer/issues) · [View Demo](https://github.com/yourusername/whatsapp-chat-analyzer)
 
 </div>
 
 ---
 
-**© 2024 WhatsApp Chat Analyzer Project** | Licensed under MIT License
+**© 2026 WhatsApp Chat Analyzer Project** | Licensed under MIT License
