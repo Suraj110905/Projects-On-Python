@@ -1046,14 +1046,14 @@ Please include:
 
 ## ⭐ If you find this project useful, please consider giving it a star!
 
-**Made with ❤️ by developers, for chat enthusiasts**
+**Made with ❤️ by Suraj Kumar**
 
 *Analyze. Understand. Improve.*
 
-[Report Bug](https://github.com/yourusername/whatsapp-chat-analyzer/issues) · [Request Feature](https://github.com/yourusername/whatsapp-chat-analyzer/issues) · [View Demo](https://github.com/yourusername/whatsapp-chat-analyzer)
+[Report Bug](https://github.com/suraj110905/whatsapp-chat-analyzer/issues) · [Request Feature](https://github.com/suraj110905/whatsapp-chat-analyzer/issues) · [Email](mailto:suraj110905@gmail.com)
 
 </div>
 
 ---
 
-**© 2024 WhatsApp Chat Analyzer Project** | Licensed under MIT License
+**© 2024 Suraj Kumar** | Licensed under MIT License
