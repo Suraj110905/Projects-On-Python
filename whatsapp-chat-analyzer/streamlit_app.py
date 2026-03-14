@@ -1,23 +1,20 @@
 """Streamlit Cloud Entry Point for WhatsApp Chat Analyzer."""
-
 import sys
+import os
 from pathlib import Path
 
-# Add src directory to Python path for imports
-src_path = Path(__file__).parent / "src"
-sys.path.insert(0, str(src_path))
+# 1. Add the 'src' directory to Python path so 'import whatsapp_analyzer' works
+current_dir = Path(__file__).parent
+src_path = current_dir / "src"
+if str(src_path) not in sys.path:
+    sys.path.insert(0, str(src_path))
 
-# Now import the main app module content
 import streamlit as st
-import pandas as pd
+import emoji  # Verifying the library is loaded from site-packages
 
-from whatsapp_analyzer.parser import ChatParser
-from whatsapp_analyzer.analyzer import ChatAnalyzer
-from whatsapp_analyzer.visualizer import ChatVisualizer
-from whatsapp_analyzer.group_analyzer import GroupChatAnalyzer
+# 2. Import the main function from your internal app logic
+# This matches the folder structure: src/whatsapp_analyzer/app.py
+from whatsapp_analyzer.app import main
 
-# Import the main function from app and execute it
-from whatsapp_analyzer import app
-
-# Run the app
-app.main()
+if __name__ == "__main__":
+    main()
