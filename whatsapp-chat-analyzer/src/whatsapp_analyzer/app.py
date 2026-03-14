@@ -5,20 +5,16 @@ import streamlit as st
 import pandas as pd
 from pathlib import Path
 
-# Add the root directory and src directory to the path to handle various deployment environments
-root_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
-src_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
 
-if root_path not in sys.path:
-    sys.path.insert(0, root_path)
-if src_path not in sys.path:
-    sys.path.insert(0, src_path)
+# Add src to path for imports
+sys.path.insert(0, str(Path(__file__).parent.parent))
 
-# Corrected imports for local modules
 from whatsapp_analyzer.parser import ChatParser
 from whatsapp_analyzer.analyzer import ChatAnalyzer
 from whatsapp_analyzer.visualizer import ChatVisualizer
 from whatsapp_analyzer.group_analyzer import GroupChatAnalyzer
+
 
 # Page configuration
 st.set_page_config(
