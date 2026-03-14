@@ -27,6 +27,10 @@ class ChatVisualizer:
         else:
             return sns.color_palette("husl", n)
 
+    # ---------------------------------------------------
+    # USER MESSAGE DISTRIBUTION
+    # ---------------------------------------------------
+
     def plot_user_message_distribution(
         self,
         user_stats: pd.DataFrame,
@@ -38,7 +42,7 @@ class ChatVisualizer:
 
         ax1.bar(user_stats['author'], user_stats['total_messages'], color=colors)
         ax1.set_xlabel('User')
-        ax1.set_ylabel('Number of Messages')
+        ax1.set_ylabel('Messages')
         ax1.set_title('Messages per User')
         ax1.tick_params(axis='x', rotation=45)
 
@@ -49,14 +53,19 @@ class ChatVisualizer:
             colors=colors,
             startangle=90
         )
+
         ax2.set_title('Message Distribution')
 
         plt.tight_layout()
 
         if save_path:
-            plt.savefig(save_path, dpi=300, bbox_inches='tight')
+            plt.savefig(save_path, dpi=300)
 
         return fig
+
+    # ---------------------------------------------------
+    # ACTIVITY TIMELINE
+    # ---------------------------------------------------
 
     def plot_activity_timeline(
         self,
@@ -66,6 +75,7 @@ class ChatVisualizer:
     ):
 
         if interactive:
+
             fig = px.line(
                 timeline_df,
                 x='datetime',
@@ -80,24 +90,27 @@ class ChatVisualizer:
             return fig
 
         else:
+
             fig, ax = plt.subplots(figsize=(15, 6))
 
             for author in timeline_df['author'].unique():
-                author_data = timeline_df[timeline_df['author'] == author]
-                ax.plot(author_data['datetime'], author_data['message_count'], label=author)
+                data = timeline_df[timeline_df['author'] == author]
+
+                ax.plot(data['datetime'], data['message_count'], label=author)
 
             ax.set_xlabel('Date')
             ax.set_ylabel('Messages')
-            ax.set_title('Message Activity Over Time')
+            ax.set_title('Message Activity')
             ax.legend()
-            plt.xticks(rotation=45)
 
+            plt.xticks(rotation=45)
             plt.tight_layout()
 
-            if save_path:
-                plt.savefig(save_path, dpi=300, bbox_inches='tight')
-
             return fig
+
+    # ---------------------------------------------------
+    # HOURLY ACTIVITY
+    # ---------------------------------------------------
 
     def plot_hourly_activity(
         self,
@@ -105,8 +118,11 @@ class ChatVisualizer:
         save_path: Optional[str] = None
     ) -> plt.Figure:
 
-        pivot_data = hourly_df.pivot(index='author', columns='hour', values='message_count')
-        pivot_data = pivot_data.fillna(0)
+        pivot_data = hourly_df.pivot(
+            index='author',
+            columns='hour',
+            values='message_count'
+        ).fillna(0)
 
         fig, ax = plt.subplots(figsize=(14, 6))
 
@@ -125,9 +141,13 @@ class ChatVisualizer:
         plt.tight_layout()
 
         if save_path:
-            plt.savefig(save_path, dpi=300, bbox_inches='tight')
+            plt.savefig(save_path)
 
         return fig
+
+    # ---------------------------------------------------
+    # DAILY ACTIVITY
+    # ---------------------------------------------------
 
     def plot_daily_activity(
         self,
@@ -141,11 +161,12 @@ class ChatVisualizer:
         colors = self._get_colors(len(authors))
 
         for i, author in enumerate(authors):
-            author_data = daily_df[daily_df['author'] == author]
+
+            data = daily_df[daily_df['author'] == author]
 
             ax.plot(
-                author_data['day_of_week'],
-                author_data['message_count'],
+                data['day_of_week'],
+                data['message_count'],
                 marker='o',
                 label=author,
                 color=colors[i]
@@ -159,10 +180,11 @@ class ChatVisualizer:
         plt.xticks(rotation=45)
         plt.tight_layout()
 
-        if save_path:
-            plt.savefig(save_path, dpi=300, bbox_inches='tight')
-
         return fig
+
+    # ---------------------------------------------------
+    # WORD CLOUD
+    # ---------------------------------------------------
 
     def create_wordcloud(
         self,
@@ -172,7 +194,7 @@ class ChatVisualizer:
     ) -> plt.Figure:
 
         if not word_freq or len(word_freq['most_common']) == 0:
-            print("No words available for wordcloud")
+            print("No words available")
             return None
 
         word_dict = dict(word_freq['most_common'][:max_words])
@@ -185,14 +207,16 @@ class ChatVisualizer:
         ).generate_from_frequencies(word_dict)
 
         fig, ax = plt.subplots(figsize=(16, 8))
+
         ax.imshow(wordcloud, interpolation='bilinear')
         ax.axis('off')
         ax.set_title('Most Common Words')
 
-        if save_path:
-            plt.savefig(save_path, dpi=300, bbox_inches='tight')
-
         return fig
+
+    # ---------------------------------------------------
+    # EMOJI DISTRIBUTION (FIXED)
+    # ---------------------------------------------------
 
     def plot_emoji_distribution(
         self,
@@ -202,92 +226,62 @@ class ChatVisualizer:
     ) -> plt.Figure:
 
         if not emoji_data or 'most_common' not in emoji_data or len(emoji_data['most_common']) == 0:
-            print("No emojis found in the chat.")
+            print("No emojis found")
             return None
 
         emojis, counts = zip(*emoji_data['most_common'][:top_n])
 
-        colors = self._get_colors(len(emojis))
-
         fig, ax = plt.subplots(figsize=(12, 6))
-        bars = ax.barh(range(len(emojis)), counts, color=colors)
+
+        ax.barh(range(len(emojis)), counts, color=self._get_colors(len(emojis)))
 
         ax.set_yticks(range(len(emojis)))
         ax.set_yticklabels(emojis, fontsize=14)
         ax.set_xlabel('Count')
-        ax.set_title(f'Top {top_n} Emojis')
-        ax.invert_yaxis()
+        ax.set_title('Top Emojis')
 
-        for i, (bar, count) in enumerate(zip(bars, counts)):
-            ax.text(count, i, f' {count}', va='center')
+        ax.invert_yaxis()
 
         plt.tight_layout()
 
-        if save_path:
-            plt.savefig(save_path, dpi=300, bbox_inches='tight')
-
         return fig
 
-    def create_interactive_dashboard(
+    # ---------------------------------------------------
+    # SENTIMENT DISTRIBUTION (FIXED)
+    # ---------------------------------------------------
+
+    def plot_sentiment_distribution(
         self,
-        user_stats: pd.DataFrame,
-        hourly_df: pd.DataFrame,
-        emoji_data: Dict
-    ):
+        sentiment_summary: Dict,
+        save_path: Optional[str] = None
+    ) -> plt.Figure:
 
-        from plotly.subplots import make_subplots
+        if not sentiment_summary or 'overall' not in sentiment_summary:
+            print("No sentiment data available")
+            return None
 
-        fig = make_subplots(
-            rows=2,
-            cols=2,
-            subplot_titles=('Messages per User', 'Hourly Activity', 'Top Emojis', 'Statistics')
+        overall = sentiment_summary['overall']
+
+        sentiments = ['Positive', 'Neutral', 'Negative']
+
+        counts = [
+            overall.get('positive', 0),
+            overall.get('neutral', 0),
+            overall.get('negative', 0)
+        ]
+
+        colors = ['#2ecc71', '#95a5a6', '#e74c3c']
+
+        fig, ax = plt.subplots(figsize=(8, 6))
+
+        ax.pie(
+            counts,
+            labels=sentiments,
+            autopct='%1.1f%%',
+            colors=colors,
+            startangle=90
         )
 
-        fig.add_trace(
-            go.Bar(x=user_stats['author'], y=user_stats['total_messages']),
-            row=1, col=1
-        )
-
-        for author in hourly_df['author'].unique():
-            data = hourly_df[hourly_df['author'] == author]
-
-            fig.add_trace(
-                go.Scatter(
-                    x=data['hour'],
-                    y=data['message_count'],
-                    mode='lines+markers',
-                    name=author
-                ),
-                row=1, col=2
-            )
-
-        if emoji_data and 'most_common' in emoji_data and len(emoji_data['most_common']) > 0:
-
-            emojis, counts = zip(*emoji_data['most_common'][:10])
-
-            fig.add_trace(
-                go.Bar(
-                    x=list(counts),
-                    y=list(emojis),
-                    orientation='h'
-                ),
-                row=2, col=1
-            )
-
-        fig.add_trace(
-            go.Table(
-                header=dict(values=['User', 'Messages']),
-                cells=dict(values=[
-                    user_stats['author'],
-                    user_stats['total_messages']
-                ])
-            ),
-            row=2, col=2
-        )
-
-        fig.update_layout(
-            height=800,
-            title="WhatsApp Chat Dashboard"
-        )
+        ax.set_title('Sentiment Distribution')
 
         return fig
