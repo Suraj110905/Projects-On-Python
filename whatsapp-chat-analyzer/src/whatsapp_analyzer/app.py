@@ -214,9 +214,15 @@ def main():
                         st.markdown(f"**{emoji_char}** - {count} times")
                 
                 with col2:
-                    st.subheader("📊 Emoji Distribution")
-                    fig_emoji = visualizer.plot_emoji_distribution(emoji_data, top_n=15)
-                    st.pyplot(fig_emoji)
+                    with col2:
+                        st.subheader("📊 Emoji Distribution")
+                        fig_emoji = visualizer.plot_emoji_distribution(emoji_data, top_n=15)
+
+                        if fig_emoji:
+                            st.pyplot(fig_emoji)
+                        else:
+                            st.info("No emojis found in this chat.")
+
                 
                 # Per-user emojis
                 st.subheader("👤 Emoji Usage by User")
