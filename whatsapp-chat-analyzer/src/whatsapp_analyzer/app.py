@@ -1,10 +1,11 @@
 """Streamlit Dashboard for WhatsApp Chat Analysis."""
-
+import sys
+import os
 import streamlit as st
 import pandas as pd
-import sys
 from pathlib import Path
 
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
 
 # Add src to path for imports
 sys.path.insert(0, str(Path(__file__).parent.parent))
