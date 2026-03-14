@@ -26,6 +26,44 @@ class ChatVisualizer:
             return self.colors[:n]
         else:
             return sns.color_palette("husl", n)
+    # ---------------------------------------------------
+# RESPONSE TIME VISUALIZATION
+# ---------------------------------------------------
+
+def plot_response_times(
+    self,
+    response_stats: dict,
+    save_path: Optional[str] = None
+) -> plt.Figure:
+
+    if not response_stats or 'per_user' not in response_stats:
+        return None
+
+    users = []
+    means = []
+
+    for user, stats in response_stats['per_user'].items():
+        users.append(user)
+        means.append(stats['mean'])
+
+    if len(users) == 0:
+        return None
+
+    fig, ax = plt.subplots(figsize=(10,6))
+
+    ax.bar(users, means)
+
+    ax.set_xlabel("User")
+    ax.set_ylabel("Average Response Time (minutes)")
+    ax.set_title("Average Response Time by User")
+
+    plt.xticks(rotation=45)
+    plt.tight_layout()
+
+    if save_path:
+        plt.savefig(save_path)
+
+    return fig
 
     # ---------------------------------------------------
     # USER MESSAGE DISTRIBUTION
